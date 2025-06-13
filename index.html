@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jean-Mi en Live - Le Punch de Trexenlive !</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6441a5; /* Violet Twitch */
+            --secondary-color: #0d1a2f; /* Bleu nuit très foncé */
+            --accent-color: #00bcd4; /* Bleu électrique / Cyan */
+            --highlight-color: #e53935; /* Rouge vif pour le punch */
+            --text-color-light: #ecf0f1; /* Gris clair */
+            --text-color-dark: #2c3e50; /* Bleu foncé */
+            --background-gradient: linear-gradient(135deg, #1e2a3a 0%, #0d1a2f 100%); /* Dégradé de fond */
+            --border-radius: 12px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--background-gradient);
+            color: var(--text-color-light);
+            line-height: 1.7;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- Global Styles --- */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 30px;
+            background-color: var(--secondary-color);
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .section {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .section:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.03); /* Légèrement plus clair */
+            margin: 2rem -30px; /* Étendre légèrement les sections paires */
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-size: 4.5em;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            font-size: 3.2em;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background-color: var(--highlight-color);
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            border-radius: 5px;
+        }
+
+        p {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- Header --- */
+        header {
+            background: var(--background-gradient);
+            padding: 2.5rem 0;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border-bottom: 3px solid var(--accent-color);
+        }
+
+        header p {
+            font-size: 1.4em;
+            color: var(--accent-color);
+            margin-top: 10px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        /* --- Video Section --- */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* Ratio 16:9 */
+            height: 0;
+            overflow: hidden;
+            background-color: #000;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .video-container:hover {
+            transform: scale(1.01);
+        }
+
+        .video-container iframe,
+        .video-container video { /* Ajout pour la balise video */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* --- Social Links --- */
+        .social-link {
+            display: inline-flex; /* Permet d'aligner icône et texte */
+            align-items: center;
+            margin: 25px 20px;
+            text-decoration: none;
+            color: var(--accent-color);
+            font-size: 1.6em;
+            font-weight: bold;
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 12px 25px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--accent-color);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-link:hover {
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            border-color: var(--text-color-light);
+        }
+
+        .social-link i {
+            margin-right: 12px;
+            font-size: 1.3em;
+        }
+
+        /* --- Jean-Mi "Punch" Animation --- */
+        .jeanmi-image {
+            width: 250px; /* Ajustez la taille selon votre image */
+            height: 250px;
+            background-image: url('https://via.placeholder.com/250/6441a5/FFFFFF?text=Jean-Mi'); /* Placeholder, REMPLACEZ PAR UNE VRAIE IMAGE DE JEAN-MI */
+            background-size: cover;
+            background-position: center;
+            border-radius: 50%;
+            border: 5px solid var(--highlight-color);
+            margin: 40px auto;
+            box-shadow: 0 0 0 0 rgba(229, 57, 53, 0.7); /* Ombre pour l'animation */
+            animation: pulse 2s infinite cubic-bezier(0.66, 0, 0, 1); /* Animation de pulsation */
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(229, 57, 53, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(229, 57, 53, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(229, 57, 53, 0); }
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: var(--background-gradient);
+            color: var(--text-color-light);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3);
+            border-top: 3px solid var(--accent-color);
+        }
+
+        footer p {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-bottom: 0;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 992px) {
+            h1 { font-size: 3.5em; }
+            h2 { font-size: 2.8em; }
+            .container { padding: 25px; margin: 1.5rem auto; }
+            .section { padding: 40px 0; }
+            .section:nth-child(even) { margin: 1.5rem -25px; padding-left: 25px; padding-right: 25px; }
+            .social-link { font-size: 1.4em; padding: 10px 20px; margin: 15px 10px; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.8em; }
+            h2 { font-size: 2.2em; }
+            header p { font-size: 1.2em; }
+            .container { padding: 20px; margin: 1rem auto; }
+            .section { padding: 30px 0; }
+            .section:nth-child(even) { margin: 1rem -20px; padding-left: 20px; padding-right: 20px; }
+            .social-link { font-size: 1.2em; padding: 8px 15px; margin: 10px 8px; }
+        }
+
+        @media (max-width: 576px) {
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.8em; }
+            header p { font-size: 1em; }
+            .container { padding: 15px; margin: 0.5rem auto; }
+            .section { padding: 20px 0; }
+            .section:nth-child(even) { margin: 0.5rem -15px; padding-left: 15px; padding-right: 15px; }
+            .social-link { font-size: 1em; padding: 6px 12px; margin: 8px 5px; }
+            .jeanmi-image { width: 180px; height: 180px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 data-aos="fade-down" data-aos-duration="1000">Jean-Mi en Live !</h1>
+        <p data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">Le Punch Man de Trexenlive !</p>
+    </header>
+
+    <div class="container">
+        <div class="section" data-aos="fade-up" data-aos-delay="200">
+            <h2>Qui est Jean-Mi ?</h2>
+            <p>Jean-Mi n'est pas qu'un simple mannequin de boxe, c'est une <strong>légende du stream Trexenlive</strong> ! Il encaisse les coups comme personne, inspire les défis et est au cœur de moments inoubliables. Préparez-vous à le voir en action !</p>
+            <div class="jeanmi-image"></div>
+            <p>Son dévouement au service du divertissement est inégalable. Chaque session est un spectacle !</p>
+        </div>
+
+        <hr style="border: 0; border-top: 1px dashed var(--highlight-color); margin: 60px 0;">
+
+        <div class="section" data-aos="fade-up" data-aos-delay="200">
+            <h2>Jean-Mi en Action !</h2>
+            <p>Découvrez Jean-Mi dans ses œuvres. Sensations fortes garanties !</p>
+            <div class="video-container">
+                <iframe src="https://www.instagram.com/p/DKzZMv5MteR/embed/" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <p>Si la vidéo ne s'affiche pas directement ici, ne vous inquiétez pas, vous pouvez la voir sur son Instagram :</p>
+            <a href="https://www.instagram.com/p/DKzZMv5MteR/" target="_blank" rel="noopener noreferrer" class="social-link" data-aos="zoom-in" data-aos-delay="400">
+                <i class="fab fa-instagram"></i> Voir la vidéo sur Instagram
+            </a>
+        </div>
+
+        <hr style="border: 0; border-top: 1px dashed var(--highlight-color); margin: 60px 0;">
+
+        <div class="section" data-aos="fade-up" data-aos-delay="200">
+            <h2>Suivez les aventures de Jean-Mi !</h2>
+            <p>Pour ne rien manquer des défis, des entraînements et des moments épiques de Jean-Mi avec Trexenlive, suivez-le sur Instagram !</p>
+            <a href="https://www.instagram.com/jeanmi_enlive" target="_blank" rel="noopener noreferrer" class="social-link" data-aos="zoom-in" data-aos-delay="600">
+                <i class="fab fa-instagram"></i> @jeanmi_enlive
+            </a>
+        </div>
+
+        </div>
+
+    <footer>
+        <p>&copy; 2025 Jean-Mi en Live. Un membre fier de l'équipe Trexenlive. Tous droits réservés.</p>
+        <p>Codé avec <i class="fas fa-heart" style="color: var(--highlight-color);"></i> pour la communauté.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true, /* Animations seulement une fois au scroll */
+        });
+
+        // Petite animation JS pour le header (optionnel)
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.querySelector('header');
+            header.style.opacity = '0';
+            setTimeout(() => {
+                header.style.transition = 'opacity 1.5s ease-out';
+                header.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
